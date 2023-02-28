@@ -1,0 +1,209 @@
+/* Css for home page main section */
+
+/* Main section */
+main {
+  padding-top: 20vh;
+  padding-bottom: 3rem;
+}
+
+/* Details container */
+.details-container {
+  width: 70%;
+  margin: 0 auto;
+  padding: 3rem;
+  margin-bottom: 3rem;
+  min-height: 60vh;
+  background-color: var(--favourite-item-background);
+  border-radius: 8px;
+  box-shadow: 0 0px 20px var(--box-shadow);
+  flex-direction: column;
+  align-items: flex-start;
+}
+
+/* Meal name heading */
+.meal-name {
+  color: var(--meal-name-font-color);
+  font-size: 3rem;
+}
+
+/* Meal category sub heading */
+.meal-category {
+  align-self: flex-start;
+  font-size: 1.2rem;
+  padding: 0.3em 0.5em;
+  color: var(--meal-category-font-color);
+  border-radius: 4px;
+  border: 3px solid;
+}
+
+/* Image of meal */
+.meal-image {
+  max-width: 100%;
+}
+/* Container of ingredients table */
+.meal-ingredients {
+  width: 100%;
+  overflow-x: auto;
+  scroll-behavior: smooth;
+}
+
+/* Scrollbar CSS for ingredients table */
+.meal-ingredients::-webkit-scrollbar {
+  width: 16px;
+}
+.meal-ingredients::-webkit-scrollbar-track {
+  background: transparent;
+}
+.meal-ingredients::-webkit-scrollbar-thumb {
+  background-color: var(--scroll-thumb-color);
+  border-radius: 20px;
+  border: 3px solid var(--scroll-track-color);
+}
+
+/* Ingredients of meal */
+.meal-ingredients table {
+  padding: 0.4em;
+  margin: 2rem 0.4rem;
+  background-color: var(--favourite-item-background);
+  border-radius: 8px;
+  box-shadow: 0 0px 20px var(--box-shadow);
+}
+
+/* Table headings in ingredients */
+.meal-ingredients th {
+  font-size: 2rem;
+  padding: 0.4rem 8rem 0.4rem 0.4rem;
+  color: var(--meal-ingredients-heading);
+}
+
+/* Each cell of the table */
+.meal-ingredients td {
+  font-size: 1.6rem;
+  padding: 0.4rem 0 0.4rem 0.4rem;
+  color: var(--meal-ingredients-data);
+}
+
+/* Every odd table row */
+.meal-ingredients tbody tr:nth-child(odd) {
+  background-color: var(--light-background);
+}
+
+/* Meal recipe container */
+.meal-recipe {
+  padding: 2em;
+  margin-top: 3rem;
+  background-color: var(--favourite-item-background);
+  border-radius: 8px;
+  box-shadow: 0 0px 20px var(--box-shadow);
+}
+
+/* Heading of recipe */
+.meal-recipe-heading {
+  font-size: 3rem;
+  color: var(--meal-recipe-heading);
+}
+
+/* Meal recipe steps */
+.meal-resipe-step {
+  font-size: 2rem;
+  margin-top: 1rem;
+  color: var(--meal-recipe-steps);
+}
+
+/* CSS for desktop screens */
+@media (max-width: 1024px) {
+  /* Details container */
+  .details-container {
+    width: 80%;
+  }
+}
+
+/* CSS for tablet screens */
+@media (max-width: 768px) {
+  /* Details container */
+  .details-container {
+    width: 90%;
+    padding: 2rem;
+  }
+
+  /* Meal name heading */
+  .meal-name {
+    font-size: 2.4rem;
+  }
+
+  /* Meal category sub heading */
+  .meal-category {
+    font-size: 1rem;
+  }
+
+  /* Table headings in ingredients */
+  .meal-ingredients th {
+    font-size: 1.6rem;
+  }
+
+  /* Each cell of the table */
+  .meal-ingredients td {
+    font-size: 1.4rem;
+  }
+
+  /* Meal recipe container */
+  .meal-recipe {
+    padding: 1.4em;
+  }
+
+  /* Heading of recipe */
+  .meal-recipe-heading {
+    font-size: 2.4rem;
+  }
+
+  /* Meal recipe steps */
+  .meal-resipe-step {
+    font-size: 1.6rem;
+  }
+}
+
+/* CSS for mobile screens */
+@media (max-width: 640px) {
+  /* Main section */
+  main {
+    padding-top: 14vh;
+  }
+
+  /* Details container */
+  .details-container {
+    width: 90%;
+    padding: 1rem;
+  }
+
+  /* Meal name heading */
+  .meal-name {
+    font-size: 1.8rem;
+  }
+
+  /* Table headings in ingredients */
+  .meal-ingredients th {
+    font-size: 1.3rem;
+  }
+
+  /* Each cell of the table */
+  .meal-ingredients td {
+    font-size: 1.2rem;
+  }
+
+  /* Meal recipe container */
+  .meal-recipe {
+    padding: 1rem;
+    margin-top: 2rem;
+  }
+
+  /* Heading of recipe */
+  .meal-recipe-heading {
+    font-size: 1.4rem;
+  }
+
+  /* Meal recipe steps */
+  .meal-resipe-step {
+    font-size: 1.2rem;
+    margin-top: 0.6rem;
+  }
+}

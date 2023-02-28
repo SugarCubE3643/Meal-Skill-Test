@@ -1,0 +1,150 @@
+/* Css for home page main section */
+
+/* Main section */
+main {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding-top: 35vh;
+}
+
+/* Search box */
+#search-box {
+  width: 60%;
+  max-width: 1000px;
+  font-size: 1.6rem;
+  border: 4px solid var(--search-box-border);
+  background-color: var(--search-box-background);
+  border-radius: 12px;
+  padding: 0.6em 1.6em;
+}
+
+/* Placeholder for search box */
+#search-box::placeholder {
+  color: var(--search-box-placeholder);
+}
+
+/* Container for search results */
+#search-results {
+  width: 60%;
+  max-width: 900px;
+  margin: 3rem 0;
+}
+
+/* Container for individual search result */
+.search-result {
+  padding: 0.8rem;
+  padding-right: 1.4rem;
+  justify-content: space-between;
+  background-color: var(--search-result-background);
+  border-radius: 8px;
+  box-shadow: 0 0px 20px var(--box-shadow);
+  margin-bottom: 0.6rem;
+}
+
+/* Link to details which is made up of image and name of meal */
+.search-result a {
+  text-decoration: none;
+  color: var(--search-result-font-color);
+  gap: 3rem;
+}
+
+/* Name of the meal in search results */
+.search-result span {
+  font-size: 1.8rem;
+}
+
+/* Image of meal in search results */
+.search-result img {
+  height: 6rem;
+  border-radius: 4px;
+}
+
+/* CSS for desktop screens */
+@media (max-width: 1024px) {
+  /* Main section */
+  main {
+    padding-top: 30vh;
+  }
+
+  /* Search box */
+  #search-box {
+    width: 70%;
+    font-size: 1.5rem;
+  }
+
+  /* Container for search results */
+  #search-results {
+    width: 70%;
+    max-width: 900px;
+  }
+
+  /* Link to details which is made up of image and name of meal */
+  .search-result a {
+    gap: 2rem;
+  }
+
+  /* Name of the meal in search results */
+  .search-result span {
+    font-size: 1.5rem;
+  }
+}
+
+/* CSS for tablet screens */
+@media (max-width: 768px) {
+  /* Search box */
+  #search-box {
+    width: 80%;
+    font-size: 1.4rem;
+  }
+
+  /* Container for search results */
+  #search-results {
+    width: 80%;
+  }
+
+  /* Container for individual search result */
+  .search-result {
+    padding: 0.6rem;
+  }
+
+  /* Link to details which is made up of image and name of meal */
+  .search-result a {
+    gap: 1.4rem;
+  }
+
+  /* Name of the meal in search results */
+  .search-result span {
+    font-size: 1.4rem;
+  }
+
+  /* Image of meal in search results */
+  .search-result img {
+    height: 5rem;
+  }
+}
+
+/* CSS for mobile screens */
+@media (max-width: 640px) {
+  /* Search box */
+  #search-box {
+    width: 90%;
+    font-size: 1.3rem;
+  }
+
+  /* Container for search results */
+  #search-results {
+    width: 90%;
+  }
+
+  /* Link to details which is made up of image and name of meal */
+  .search-result a {
+    gap: 1.2rem;
+  }
+
+  /* Name of the meal in search results */
+  .search-result span {
+    font-size: 1.3rem;
+  }
+}

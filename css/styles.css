@@ -1,0 +1,188 @@
+/* CSS variables */
+:root {
+  --background: #121212;
+  --box-shadow: rgba(0, 0, 0, 0.7);
+  --light-background: rgba(255, 255, 255, 0.1);
+  --scroll-track-color: rgba(107, 107, 107, 0.1);
+  --scroll-thumb-color: rgba(51, 51, 51, 0.6);
+  --logo-font-color: #e5e5e5;
+  --link-font-color: #e5e5e5;
+  --link-background-color: rgba(255, 255, 255, 0.1);
+  --favourite-unselected: #949494;
+  --favourite-hover: #e21a45;
+  --favourite-selected: #e21a45;
+  --search-box-border: rgba(0, 0, 0, 0.3);
+  --search-box-background: rgba(255, 255, 255, 0.9);
+  --search-box-placeholder: rgb(37, 37, 37);
+  --search-result-background: rgba(255, 255, 255, 0.1);
+  --search-result-font-color: rgba(240, 240, 240, 0.7);
+  --favourite-item-background: rgba(255, 255, 255, 0.1);
+  --favourite-item-font-color: rgba(240, 240, 240, 0.7);
+  --meal-name-font-color: #03dac6;
+  --meal-category-font-color: rgba(240, 240, 240, 0.7);
+  --meal-ingredients-hover-background: rgba(255, 255, 255, 0.4);
+  --meal-ingredients-heading: #bb86fc;
+  --meal-ingredients-data: #cfe4e2f1;
+  --meal-recipe-heading: #bb86fc;
+  --meal-recipe-steps: #cfe4e2f1;
+}
+
+/* Some reasonable resets and changes to deafult css*/
+html {
+  box-sizing: border-box;
+  height: 100%;
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: inherit;
+  margin: 0;
+  padding: 0;
+
+  /* Setting the font family for all elements */
+  font-family: sans-serif;
+}
+
+/* Removing default list styles */
+li {
+  list-style: none;
+}
+
+/* Body properties */
+body {
+  background: var(--background);
+  height: inherit;
+}
+
+/* scrollbar styles */
+/* Removing any of the following styles removes all styles from scrollbar */
+body::-webkit-scrollbar {
+  width: 16px; /* width of the entire scrollbar */
+}
+
+body::-webkit-scrollbar-track {
+  background: transparent; /* color of the tracking area */
+}
+
+body::-webkit-scrollbar-thumb {
+  background-color: var(--scroll-thumb-color); /* color of the scroll thumb */
+  border-radius: 20px; /* roundness of the scroll thumb */
+  border: 3px solid var(--scroll-track-color); /* creates padding around scroll thumb */
+}
+
+/* Utilities */
+.flex {
+  display: flex;
+  align-items: center;
+}
+
+/* Common CSS of Favourite icon */
+
+/* Default styles */
+i {
+  cursor: pointer;
+  color: var(--favourite-unselected);
+  transition: 0.3s;
+}
+i:before {
+  content: "\2764";
+  font-style: normal;
+  font-size: 2em;
+}
+
+/* Hover state */
+i:hover {
+  color: var(--favourite-hover);
+}
+
+/* Favourited state */
+i[data-favourite="true"] {
+  color: var(--favourite-selected);
+}
+
+/* Navigation bar properties */
+nav {
+  position: fixed;
+  width: 100vw;
+  background-color: var(--background);
+  padding: 2rem 2rem;
+  justify-content: space-between;
+  box-shadow: 0 20px 20px var(--background);
+}
+
+/* Logo */
+nav .logo {
+  color: var(--logo-font-color);
+  font-size: 1.6rem;
+  border: 3px solid var(--logo-font-color);
+  padding: 0.2em 0.8em;
+}
+
+/* Navigation links */
+nav .links {
+  padding: 0.8rem 2rem;
+  font-size: 1.2rem;
+  gap: 2em;
+  background-color: var(--link-background-color);
+  border-radius: 8px;
+  box-shadow: 0 0px 20px var(--box-shadow);
+}
+
+/* Resetting deafult styles of link */
+nav a {
+  text-decoration: none;
+  color: var(--link-font-color);
+}
+
+/* Active link */
+nav .active {
+  font-size: 1.4rem;
+  border-bottom: 3px solid var(--link-font-color);
+}
+
+/* Showing hidden link only when it's active */
+nav .hidden {
+  display: none;
+}
+nav .hidden.active {
+  display: block;
+}
+
+@media (max-width: 1024px) {
+}
+
+@media (max-width: 768px) {
+  /* Navigation bar properties for tablet screens */
+  nav {
+    padding: 1rem;
+  }
+  nav .logo {
+    font-size: 1.4rem;
+  }
+  nav .links {
+    font-size: 1.1rem;
+    gap: 1.4em;
+  }
+  nav .active {
+    font-size: 1.3rem;
+  }
+}
+
+@media (max-width: 640px) {
+  /* Navigation bar properties for small screen*/
+  nav {
+    padding: 0.4rem;
+  }
+  nav .logo {
+    font-size: 1.2rem;
+  }
+  nav .links {
+    font-size: 1rem;
+    gap: 1em;
+    border-radius: 0;
+  }
+  nav .active {
+    font-size: 1.2rem;
+  }
+}

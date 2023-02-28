@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Meal</title>
+
+    <!--Icon for the homepage -->
+    <!--  -->
+
+    <!-- Stylesheets -->
+    <link rel="stylesheet" href="./css/styles.css" />
+    <link rel="stylesheet" href="./css/home.css" />
+  </head>
+  <body id="home">
+    <nav class="flex">
+      <span class="logo">Meals</span>
+      <ul class="links flex">
+        <li class="active"><a href="index.html">Home</a></li>
+        <li><a href="favourites.html">Favourites</a></li>
+        <li class="hidden"><a>Details</a></li>
+      </ul>
+    </nav>
+    <main>
+      <input
+        id="search-box"
+        type="text"
+        placeholder="Enter name of meal"
+        autocomplete="off"
+      />
+      <ul id="search-results">
+        <!-- Template search result -->
+        <!-- <li class="search-result flex">
+          <a href="details.html?id=52771" class="flex">
+            <img
+              src="https://www.themealdb.com/images/media/meals/ustsqw1468250014.jpg"
+              alt="thumbnail"
+            />
+            <span>Spicy Arrabiata Penne</span>
+          </a>
+          <i></i>
+        </li> -->
+      </ul>
+    </main>
+
+    <!-- Scripts -->
+    <script src="./index.js"></script>
+  </body>
+</html>

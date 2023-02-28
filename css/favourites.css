@@ -1,0 +1,130 @@
+/* Css for home page main section */
+
+/* Main section */
+main {
+  padding-top: 20vh;
+  padding-bottom: 3rem;
+}
+
+/* container of facourite items */
+.favourites-list {
+  width: 90%;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+/* Container for individual favourite item */
+.favourite-item {
+  padding: 1rem;
+  padding-right: 2rem;
+  justify-content: space-between;
+  background-color: var(--favourite-item-background);
+  border-radius: 8px;
+  box-shadow: 0 0px 20px var(--box-shadow);
+  margin-bottom: 1.6rem;
+}
+
+/* Link to details which is made up of image and details of meal*/
+.favourite-item a {
+  text-decoration: none;
+  gap: 3rem;
+}
+
+/* Details of meal in the favourite item */
+.details-container {
+  flex-direction: column;
+  justify-content: space-around;
+  gap: 3rem;
+}
+
+/* Name of meal */
+.meal-name {
+  font-size: 2rem;
+  color: var(--meal-name-font-color);
+}
+
+/* Category of meal */
+.meal-category {
+  align-self: flex-start;
+  font-size: 1.2rem;
+  padding: 0.3em 0.5em;
+  color: var(--meal-category-font-color);
+  border-radius: 4px;
+  border: 3px solid;
+}
+
+/* Image of meal in favourite item */
+.favourite-item img {
+  height: 12rem;
+  border-radius: 4px;
+}
+
+/* CSS for desktop screens */
+@media (max-width: 1024px) {
+  /* Image of meal in favourite item */
+  .favourite-item img {
+    height: 10rem;
+  }
+}
+
+/* CSS for tablet screens */
+@media (max-width: 768px) {
+  /* Container for individual favourite item */
+  .favourite-item {
+    padding: 0.8rem;
+    padding-right: 1.6rem;
+  }
+
+  /* Link to details which is made up of image and details of meal*/
+  .favourite-item a {
+    gap: 2rem;
+  }
+
+  /* Details of meal in the favourite item */
+  .details-container {
+    gap: 2rem;
+  }
+  /* Image of meal in favourite item */
+  .favourite-item img {
+    height: 8rem;
+  }
+}
+
+/* CSS for mobile screens */
+@media (max-width: 640px) {
+  /* Main section */
+  main {
+    padding-top: 14vh;
+  }
+  /* Container for individual favourite item */
+  .favourite-item {
+    padding: 0.6rem;
+    padding-right: 0.8rem;
+    margin-bottom: 1rem;
+  }
+
+  /* Link to details which is made up of image and details of meal*/
+  .favourite-item a {
+    gap: 1rem;
+  }
+
+  /* Details of meal in the favourite item */
+  .details-container {
+    gap: 1rem;
+  }
+
+  /* Name of meal */
+  .meal-name {
+    font-size: 1.2rem;
+  }
+
+  /* Category of meal */
+  .meal-category {
+    font-size: 0.8rem;
+  }
+
+  /* Image of meal in favourite item */
+  .favourite-item img {
+    height: 6rem;
+  }
+}
