@@ -29,13 +29,16 @@
 
 /* Some reasonable resets and changes to deafult css*/
 html {
+  -webkit-box-sizing: border-box;
   box-sizing: border-box;
+  scroll-behavior: smooth;
   height: 100%;
 }
 
 *,
 *::before,
 *::after {
+  -webkit-box-sizing: inherit;
   box-sizing: inherit;
   margin: 0;
   padding: 0;
@@ -73,7 +76,11 @@ body::-webkit-scrollbar-thumb {
 
 /* Utilities */
 .flex {
+  display: -webkit-box;
+  display: -ms-flexbox;
   display: flex;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
   align-items: center;
 }
 
@@ -83,6 +90,8 @@ body::-webkit-scrollbar-thumb {
 i {
   cursor: pointer;
   color: var(--favourite-unselected);
+  -webkit-transition: 0.3s;
+  -o-transition: 0.3s;
   transition: 0.3s;
 }
 i:before {
@@ -107,7 +116,10 @@ nav {
   width: 100vw;
   background-color: var(--background);
   padding: 2rem 2rem;
+  -webkit-box-pack: justify;
+  -ms-flex-pack: justify;
   justify-content: space-between;
+  -webkit-box-shadow: 0 20px 20px var(--background);
   box-shadow: 0 20px 20px var(--background);
 }
 
@@ -126,6 +138,7 @@ nav .links {
   gap: 2em;
   background-color: var(--link-background-color);
   border-radius: 8px;
+  -webkit-box-shadow: 0 0px 20px var(--box-shadow);
   box-shadow: 0 0px 20px var(--box-shadow);
 }
 

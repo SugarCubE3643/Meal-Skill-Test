@@ -2,9 +2,18 @@
 
 /* Main section */
 main {
+  display: -webkit-box;
+  display: -ms-flexbox;
   display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+  -ms-flex-direction: column;
   flex-direction: column;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
   align-items: center;
+  -webkit-box-pack: center;
+  -ms-flex-pack: center;
   justify-content: center;
   padding-top: 35vh;
 }
@@ -21,6 +30,18 @@ main {
 }
 
 /* Placeholder for search box */
+#search-box::-webkit-input-placeholder {
+  color: var(--search-box-placeholder);
+}
+#search-box::-moz-placeholder {
+  color: var(--search-box-placeholder);
+}
+#search-box:-ms-input-placeholder {
+  color: var(--search-box-placeholder);
+}
+#search-box::-ms-input-placeholder {
+  color: var(--search-box-placeholder);
+}
 #search-box::placeholder {
   color: var(--search-box-placeholder);
 }
@@ -36,9 +57,12 @@ main {
 .search-result {
   padding: 0.8rem;
   padding-right: 1.4rem;
+  -webkit-box-pack: justify;
+  -ms-flex-pack: justify;
   justify-content: space-between;
   background-color: var(--search-result-background);
   border-radius: 8px;
+  -webkit-box-shadow: 0 0px 20px var(--box-shadow);
   box-shadow: 0 0px 20px var(--box-shadow);
   margin-bottom: 0.6rem;
 }
