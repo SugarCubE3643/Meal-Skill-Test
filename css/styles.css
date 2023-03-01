@@ -106,6 +106,11 @@ i:hover {
   color: var(--favourite-hover);
 }
 
+/* Unfavourited state */
+i[data-favourite="false"] {
+  color: var(--favourite-unselected);
+}
+
 /* Favourited state */
 i[data-favourite="true"] {
   color: var(--favourite-selected);
