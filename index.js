@@ -109,12 +109,14 @@ const mealApp = {
               <span>${meal.strMeal}</span>
             </a>
         `;
-    const favIcon = document.createElement("i");
+    const favIcon = document.createElement("button");
     favIcon.setAttribute(
       "data-favourite",
       favourites.includes(meal.idMeal) ? true : false
     );
     favIcon.setAttribute("data-id", meal.idMeal);
+    favIcon.classList.add("favourite-btn-icon");
+    favIcon.innerHTML = "&#10084;&#65039;";
     favIcon.addEventListener("click", mealApp.toggleMealInFavourites);
     listItem.appendChild(favIcon);
     return listItem;
@@ -229,6 +231,7 @@ const mealApp = {
   },
   createListItemFavourites: (meal) => {
     const listItem = document.createElement("li");
+    const favourites = JSON.parse(localStorage.getItem("favourites"));
     listItem.classList.add("favourite-item", "flex");
     listItem.innerHTML = `
             <a href="details.html?id=${meal.idMeal}" class="flex">
@@ -242,9 +245,14 @@ const mealApp = {
               </span>
             </a>
         `;
-    const favIcon = document.createElement("i");
-    favIcon.setAttribute("data-favourite", true);
+    const favIcon = document.createElement("button");
+    favIcon.setAttribute(
+      "data-favourite",
+      favourites.includes(meal.idMeal) ? true : false
+    );
     favIcon.setAttribute("data-id", meal.idMeal);
+    favIcon.classList.add("favourite-btn-icon");
+    favIcon.innerHTML = "&#10084;&#65039;";
     favIcon.addEventListener("click", mealApp.removeMealFromFavourites);
     listItem.appendChild(favIcon);
     return listItem;

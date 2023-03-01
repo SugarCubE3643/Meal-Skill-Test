@@ -88,32 +88,39 @@ body::-webkit-scrollbar-thumb {
 /* Common CSS of Favourite icon */
 
 /* Default styles */
-i {
-  cursor: pointer;
-  color: var(--favourite-unselected);
-  -webkit-transition: 0.3s;
-  -o-transition: 0.3s;
-  transition: 0.3s;
-}
-i:before {
-  content: "\2764";
-  font-style: normal;
-  font-size: 2em;
+.favourite-btn-icon {
+  background-color: transparent;
+  border: none;
+  font-size: 2rem;
+  opacity: 0.4;
+  transition: 400ms;
 }
 
-/* Hover state */
-i:hover {
-  color: var(--favourite-hover);
+/* Hover state of favourite button */
+.favourite-btn-icon:hover {
+  transform: scale(1.1);
+  opacity: 0.8;
 }
 
-/* Unfavourited state */
-i[data-favourite="false"] {
-  color: var(--favourite-unselected) !important;
+/* Active state of favourite button */
+.favourite-btn-icon:active {
+  transform: scale(1);
 }
 
-/* Favourited state */
-i[data-favourite="true"] {
-  color: var(--favourite-selected) !important;
+/* Selected state of favourite button */
+.favourite-btn-icon[data-favourite="true"] {
+  transform: scale(1);
+  opacity: 1;
+}
+
+/* Hovering over selected favourite button */
+.favourite-btn-icon[data-favourite="true"]:hover {
+  transform: scale(1.2);
+}
+
+/* Active state of selected favourite button */
+.favourite-btn-icon[data-favourite="true"]:active {
+  transform: scale(0.9);
 }
 
 /* Navigation bar properties */
@@ -169,6 +176,10 @@ nav .hidden.active {
 }
 
 @media (max-width: 1024px) {
+  /* Favourite button styles */
+  .favourite-btn-icon {
+    font-size: 1.9rem;
+  }
 }
 
 @media (max-width: 768px) {
@@ -185,6 +196,11 @@ nav .hidden.active {
   }
   nav .active {
     font-size: 1.3rem;
+  }
+
+  /* Favourite button styles */
+  .favourite-btn-icon {
+    font-size: 1.8rem;
   }
 }
 
@@ -203,5 +219,10 @@ nav .hidden.active {
   }
   nav .active {
     font-size: 1.2rem;
+  }
+
+  /* Favourite button styles */
+  .favourite-btn-icon {
+    font-size: 1.4rem;
   }
 }
