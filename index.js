@@ -253,7 +253,11 @@ const mealApp = {
     favIcon.setAttribute("data-id", meal.idMeal);
     favIcon.classList.add("favourite-btn-icon");
     favIcon.innerHTML = "&#10084;&#65039;";
-    favIcon.addEventListener("click", mealApp.removeMealFromFavourites);
+    favIcon.addEventListener("click", (e) => {
+      setTimeout(() => {
+        mealApp.removeMealFromFavourites(e);
+      }, 1200);
+    });
     listItem.appendChild(favIcon);
     return listItem;
   },
