@@ -92,7 +92,8 @@ const mealApp = {
       });
     } else {
       const listItem = document.createElement("li");
-      listItem.textContent = "No meal found";
+      listItem.classList.add("search-result", "flex");
+      listItem.innerHTML = `<span>No meals found</span>`;
       searchSuggestions.append(listItem);
     }
   },

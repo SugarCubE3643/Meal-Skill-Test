@@ -2,7 +2,7 @@
 
 /* Main section */
 main {
-  padding-top: 20vh;
+  padding-top: 12rem;
   padding-bottom: 3rem;
 }
 
@@ -175,7 +175,7 @@ main {
 @media (max-width: 640px) {
   /* Main section */
   main {
-    padding-top: 14vh;
+    padding-top: 8rem;
   }
 
   /* Details container */

@@ -15,7 +15,7 @@ main {
   -webkit-box-pack: center;
   -ms-flex-pack: center;
   justify-content: center;
-  padding-top: 35vh;
+  padding-top: 16rem;
 }
 
 /* Search box */
@@ -70,13 +70,13 @@ main {
 /* Link to details which is made up of image and name of meal */
 .search-result a {
   text-decoration: none;
-  color: var(--search-result-font-color);
   gap: 3rem;
 }
 
 /* Name of the meal in search results */
 .search-result span {
   font-size: 1.8rem;
+  color: var(--search-result-font-color);
 }
 
 /* Image of meal in search results */
@@ -89,7 +89,7 @@ main {
 @media (max-width: 1024px) {
   /* Main section */
   main {
-    padding-top: 30vh;
+    padding-top: 14rem;
   }
 
   /* Search box */
