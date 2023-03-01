@@ -43,6 +43,31 @@ main {
   border: 3px solid;
 }
 
+/* Add to favourites button */
+.favourite-btn {
+  font-size: 1rem;
+  padding: 0.3em 0.5em;
+  color: var(--favourite-unselected);
+  background-color: transparent;
+  border-radius: 4px;
+  border: 3px solid;
+  transition: 400ms;
+}
+
+/* Favourite buttton hover state */
+.favourite-btn:hover {
+  color: var(--favourite-hover);
+  transform: scale(1.1);
+}
+
+.favourite-btn:active {
+  transform: scale(1);
+}
+
+.favourite-btn[data-favourite="true"] {
+  color: var(--favourite-selected);
+}
+
 /* Image of meal */
 .meal-image {
   max-width: 100%;
@@ -133,11 +158,6 @@ main {
   .details-container {
     width: 90%;
     padding: 2rem;
-  }
-
-  /* Meal name heading */
-  .meal-name {
-    font-size: 2.4rem;
   }
 
   /* Meal category sub heading */

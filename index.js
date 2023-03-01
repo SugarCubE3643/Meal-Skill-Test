@@ -123,6 +123,7 @@ const mealApp = {
     if (meal) {
       var count = 1;
       const ingredients = [];
+      let favourites = JSON.parse(localStorage.getItem("favourites"));
       while (
         meal["strMeasure" + count] != "" &&
         meal["strMeasure" + count] != null &&
@@ -145,7 +146,15 @@ const mealApp = {
       details.classList.add("details-container", "flex");
       details.innerHTML = `
         <h1 class="meal-name">${meal.strMeal}</h1>
+        <br />
         <span class="meal-category">${meal.strCategory}</span>
+        <br />
+        <button 
+          class="favourite-btn" 
+          data-id= ${meal.idMeal} 
+          data-favourite="${
+            favourites.includes(meal.idMeal) ? true : false
+          }">Add to favourites</button>
         <br />
         <img
           class="meal-image"
@@ -194,6 +203,11 @@ const mealApp = {
       `;
       details.innerHTML += mealIngredientsHTML;
       main.appendChild(details);
+
+      // Adding event listener to the favourite button
+      document
+        .querySelector(".favourite-btn")
+        .addEventListener("click", mealApp.toggleMealInFavourites);
     }
   },
   getFavourites: () => {
