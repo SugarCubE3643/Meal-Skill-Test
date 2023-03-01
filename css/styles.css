@@ -25,6 +25,7 @@
   --meal-ingredients-data: #cfe4e2f1;
   --meal-recipe-heading: #bb86fc;
   --meal-recipe-steps: #cfe4e2f1;
+  --meal-recipe-step-index: #bb86fc;
 }
 
 /* Some reasonable resets and changes to deafult css*/

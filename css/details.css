@@ -60,10 +60,12 @@ main {
   transform: scale(1.1);
 }
 
+/* Active state of favourite button */
 .favourite-btn:active {
   transform: scale(1);
 }
 
+/* When the given meal is already present in favourites */
 .favourite-btn[data-favourite="true"] {
   color: var(--favourite-selected);
 }
@@ -133,8 +135,9 @@ main {
 
 /* Heading of recipe */
 .meal-recipe-heading {
-  font-size: 3rem;
+  font-size: 2.6rem;
   color: var(--meal-recipe-heading);
+  text-decoration: underline;
 }
 
 /* Meal recipe steps */
@@ -142,8 +145,14 @@ main {
   font-size: 2rem;
   margin-top: 1rem;
   color: var(--meal-recipe-steps);
+  white-space: pre-line;
 }
 
+/* Step indexes */
+.step-index {
+  color: var(--meal-recipe-step-index);
+  font-weight: bold;
+}
 /* CSS for desktop screens */
 @media (max-width: 1024px) {
   /* Details container */
@@ -182,7 +191,7 @@ main {
 
   /* Heading of recipe */
   .meal-recipe-heading {
-    font-size: 2.4rem;
+    font-size: 2.2rem;
   }
 
   /* Meal recipe steps */
@@ -206,7 +215,7 @@ main {
 
   /* Meal name heading */
   .meal-name {
-    font-size: 1.8rem;
+    font-size: 2.4rem;
   }
 
   /* Table headings in ingredients */
@@ -227,7 +236,8 @@ main {
 
   /* Heading of recipe */
   .meal-recipe-heading {
-    font-size: 1.4rem;
+    font-size: 1.8rem;
+    font-weight: bold;
   }
 
   /* Meal recipe steps */
