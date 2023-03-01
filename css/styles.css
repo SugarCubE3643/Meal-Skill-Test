@@ -108,12 +108,12 @@ i:hover {
 
 /* Unfavourited state */
 i[data-favourite="false"] {
-  color: var(--favourite-unselected);
+  color: var(--favourite-unselected) !important;
 }
 
 /* Favourited state */
 i[data-favourite="true"] {
-  color: var(--favourite-selected);
+  color: var(--favourite-selected) !important;
 }
 
 /* Navigation bar properties */
