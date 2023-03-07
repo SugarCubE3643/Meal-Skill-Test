@@ -243,10 +243,17 @@ const mealApp = {
       }
 
       // splitting and trimming the instructions and storing it as an array
+      // filter removes null and undefined, items starting with notes, items that are numbers, items starting with step
       var instructions = meal.strInstructions
         .split(".")
         .map((item) => item.trim())
-        .filter(Boolean);
+        .filter(
+          (item) =>
+            Boolean(item) &&
+            !/^\d+$/.test(item) &&
+            !/^notes/i.test(item) &&
+            !/^step/i.test(item)
+        );
 
       // Creating the list item in parts using template literals
       const main = document.querySelector("main");
@@ -327,7 +334,6 @@ const mealApp = {
   // Function for fetching meal details of each mealID stored in the favourites list
   // All of the details can also be stored in favourites list but this approach is to make sure that the meals details are upto date
   getFavourites: () => {
-
     // Getting favourite meals list from localstorage
     const favourites = JSON.parse(localStorage.getItem("favourites"));
     const favList = document.querySelector(".favourites-list");
