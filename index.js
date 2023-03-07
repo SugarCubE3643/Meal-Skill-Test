@@ -246,15 +246,18 @@ const mealApp = {
       // filter removes null and undefined, items starting with notes, items that are numbers, items starting with step
       var instructions = meal.strInstructions
         .split(".")
-        .map((item) => item.trim())
+        .map((item) => {
+          // Removing step number from the instruction if present
+          if (/^\s*step\s[0-9]+/gi.test(item)) {
+            return item.replace(/^\s*step\s[0-9]+/gi, "").trim();
+          }
+          return item.trim();
+        })
         .filter(
           (item) =>
-            Boolean(item) &&
-            !/^\d+$/.test(item) &&
-            !/^notes/i.test(item) &&
-            !/^step/i.test(item)
+            Boolean(item) && !/^\d+$/.test(item) && !/^notes/i.test(item)
         );
-
+      console.log(instructions);
       // Creating the list item in parts using template literals
       const main = document.querySelector("main");
       const details = document.createElement("div");
