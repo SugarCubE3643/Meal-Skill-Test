@@ -19,6 +19,8 @@ const mealApp = {
     const currentPage = document.body.id;
     switch (currentPage) {
       case "home":
+        // Adding an event listener to the search box listening for changes in input
+        // It calls for getMealsSuggestions through debounce function
         document
           .querySelector("#search-box")
           .addEventListener(
@@ -30,74 +32,150 @@ const mealApp = {
           );
         break;
       case "details":
+        // Getting the URL parameter id
         var query = window.location.search;
         const urlParams = new URLSearchParams(query);
         const id = urlParams.get("id");
+
+        // Checking if the id parameter is present or not
         if (id) {
           mealApp.getMealDetails(id);
         } else {
-          // Handle errors later
+          // Adding an error message to the content in case no id present
+          document.querySelector("main").innerHTML = `
+            <h1 style="
+                color:var(--link-font-color);
+                font-size:4rem;
+              ">
+              Invalid Link
+            </h1>`;
         }
         break;
       case "favourites":
         mealApp.getFavourites();
     }
   },
+
+  // Debounce function
   debounce: function (fn, delay) {
     let timer;
     return function () {
       let context = this,
         args = arguments;
+      // If the function is called again before the setTimeout delay is over the timer is cleared before it can use the callback function
       clearTimeout(timer);
       timer = setTimeout(() => {
-        fn.apply(context, arguments);
+        fn.apply(context, args);
       }, delay);
     };
   },
+
+  // API which takes in a URL and returns either resolved promise with the requested data or rejected promise with error message
   mealAPI: async (mealURL) => {
     const response = await fetch(mealURL);
+
+    // If response.ok is true it means the request succeded
+    // If it is false it means the request failed
     if (response.ok) {
       const responseJSON = await response.json();
       return Promise.resolve(responseJSON);
     } else {
-      return Promise.reject("No meals found");
+      // returning rejected promise with a collective message that represents all types of failed request
+      return Promise.reject("Server error");
     }
   },
-  getMealDetails: (id) => {
-    let mealURL = mealApp.baseURL + "lookup.php?i=" + id;
-    mealApp.mealAPI(mealURL).then((data) => {
-      if (data) mealApp.addMealDetailsToDOM(data.meals[0]);
-    });
+
+  //
+  toggleMealInFavourites: (e) => {
+    // Getting list of favourites
+    let favourites = JSON.parse(localStorage.getItem("favourites"));
+
+    // Getting index of the meal in favourites array using data attribute id of target
+    const index = favourites.indexOf(e.target.dataset.id);
+
+    // indexOf returns -1 when the element is not present
+    // Adding the item to favourites list in this case
+    // and removing it from the favourites list otherwise
+    if (index == -1) {
+      favourites = [...favourites, e.target.dataset.id];
+    } else {
+      favourites.splice(index, 1);
+    }
+
+    // Putting the new favourites list back into the localstorage
+    localStorage.setItem("favourites", JSON.stringify(favourites));
+
+    // Setting the after checking if the id is present in favourites list
+    e.target.setAttribute(
+      "data-favourite",
+      favourites.includes(e.target.dataset.id)
+    );
+
+    // Performing separate actions based on which page the toggle function is being called from
+    const currentPage = document.body.id;
+    if (currentPage === "favourites") {
+      // Removing the favourite item from DOM
+      e.target.parentElement.remove();
+    }
   },
+  ///////////////////// Functions for home page /////////////////////
+
+  // Function for fetching suggestions
   getMealSuggestions: (e) => {
     let partialInput = e.target.value;
     let mealURL = mealApp.baseURL + "search.php?s=" + partialInput;
 
+    // Fetching the meals using partial input
     mealApp
       .mealAPI(mealURL)
       .then((data) => {
+        // Setting data.meals as empty array in case input is empty
         if (partialInput === "") data.meals = [];
+
+        // Adding  meals to suggestions list using meals array
         if (data) mealApp.addMealsToSuggestions(data.meals);
       })
-      .catch(console.log);
+      .catch((message) => {
+        // Adding an error message to the suggestions in case API returns rejected promise
+        const listItem = document.createElement("li");
+        listItem.classList.add("search-result", "flex");
+        listItem.innerHTML = `<span>${message}</span>`;
+        searchSuggestions.append(listItem);
+      });
   },
+
+  // Takes in a meals array as input and adds all the details to suggestions in DOM
   addMealsToSuggestions: (meals) => {
     let searchSuggestions = document.querySelector("#search-results");
+
+    // Emptying out the previous suggestions
     searchSuggestions.innerHTML = "";
+
+    // Getting favourite meals from localstorage
     let favourites = JSON.parse(localStorage.getItem("favourites"));
     if (meals) {
       meals.forEach((meal) => {
-        const listItem = mealApp.createListItemSuggestions(meal, favourites);
+        // Checking if the meal is present in favourites or not
+        const favourite = favourites.includes(meal.idMeal);
+
+        // Creating list item using another function with meal information
+        const listItem = mealApp.createListItemSuggestions(meal, favourite);
+
+        // Adding the meal suggestion to DOM
         searchSuggestions.appendChild(listItem);
       });
     } else {
+      // If meals is null that means no meals were found in database
+      // Adding No meals found message to suggestions in this case
       const listItem = document.createElement("li");
       listItem.classList.add("search-result", "flex");
       listItem.innerHTML = `<span>No meals found</span>`;
       searchSuggestions.append(listItem);
     }
   },
-  createListItemSuggestions: (meal, favourites) => {
+
+  // Creating list item using meal information
+  createListItemSuggestions: (meal, favourite) => {
     const listItem = document.createElement("li");
     listItem.classList.add("search-result", "flex");
     listItem.innerHTML = `
@@ -110,10 +188,7 @@ const mealApp = {
             </a>
         `;
     const favIcon = document.createElement("button");
-    favIcon.setAttribute(
-      "data-favourite",
-      favourites.includes(meal.idMeal) ? true : false
-    );
+    favIcon.setAttribute("data-favourite", favourite);
     favIcon.setAttribute("data-id", meal.idMeal);
     favIcon.classList.add("favourite-btn-icon");
     favIcon.innerHTML = "&#10084;&#65039;";
@@ -121,11 +196,39 @@ const mealApp = {
     listItem.appendChild(favIcon);
     return listItem;
   },
+
+  ///////////////////// Functions for details page /////////////////////
+
+  // Uses API to get details of meal using it's ID
+  getMealDetails: (id) => {
+    let mealURL = mealApp.baseURL + "lookup.php?i=" + id;
+    mealApp
+      .mealAPI(mealURL)
+      .then((data) => {
+        // Adding meal details to DOM
+        if (data) mealApp.addMealDetailsToDOM(data.meals[0]);
+      })
+      .catch((message) => {
+        // Adding an error message to the content in case API returns rejected promise
+        document.querySelector("main").innerHTML = `
+        <h1 style="
+            color:var(--link-font-color);
+            font-size:4rem;
+          ">
+          ${message}
+        </h1>`;
+      });
+  },
+
   addMealDetailsToDOM: (meal) => {
     if (meal) {
-      var count = 1;
-      const ingredients = [];
+      var count = 1; // Serves as a counter for ingredients and its measures
+      const ingredients = []; // Initializing ingredients array
+
+      // Getting favourite meals list from localstorage
       let favourites = JSON.parse(localStorage.getItem("favourites"));
+
+      // Adding ingredient and its measure while neither of them are either empty string or null
       while (
         meal["strMeasure" + count] != "" &&
         meal["strMeasure" + count] != null &&
@@ -138,11 +241,14 @@ const mealApp = {
         ingredients.push(ingredient);
         count++;
       }
+
+      // splitting and trimming the instructions and storing it as an array
       var instructions = meal.strInstructions
         .split(".")
         .map((item) => item.trim())
         .filter(Boolean);
 
+      // Creating the list item in parts using template literals
       const main = document.querySelector("main");
       const details = document.createElement("div");
       details.classList.add("details-container", "flex");
@@ -154,9 +260,9 @@ const mealApp = {
         <button 
           class="favourite-btn" 
           data-id= ${meal.idMeal} 
-          data-favourite="${
-            favourites.includes(meal.idMeal) ? true : false
-          }">Add to favourites</button>
+          data-favourite="${favourites.includes(
+            meal.idMeal
+          )}">Add to favourites</button>
         <br />
         <img
           class="meal-image"
@@ -175,6 +281,8 @@ const mealApp = {
             </thead>
             <tbody>
       `;
+
+      // Adding meal ingredients information
       ingredients.forEach((ingredient) => {
         mealIngredientsHTML += `
         <tr>
@@ -191,6 +299,7 @@ const mealApp = {
           <div class="meal-recipe-heading">Recipe</div>
       `;
 
+      // Adding meal recipe steps
       instructions.forEach((instruction, index) => {
         mealIngredientsHTML += `
         <div class="meal-resipe-step">
@@ -212,12 +321,20 @@ const mealApp = {
         .addEventListener("click", mealApp.toggleMealInFavourites);
     }
   },
+
+  ///////////////////// Functions for favourites page /////////////////////
+
+  // Function for fetching meal details of each mealID stored in the favourites list
+  // All of the details can also be stored in favourites list but this approach is to make sure that the meals details are upto date
   getFavourites: () => {
+
+    // Getting favourite meals list from localstorage
     const favourites = JSON.parse(localStorage.getItem("favourites"));
     const favList = document.querySelector(".favourites-list");
     favourites.forEach((id) => {
       const query = "lookup.php?i=" + id;
       const mealURL = mealApp.baseURL + query;
+      // getting meal details of each meal and adding it to the DOM
       mealApp
         .mealAPI(mealURL)
         .then((data) => {
@@ -229,9 +346,14 @@ const mealApp = {
         .catch(console.log);
     });
   },
+
+  // Function for creating a list item for favourites from the meal information
   createListItemFavourites: (meal) => {
-    const listItem = document.createElement("li");
+    // Getting favourites list from localstorage
     const favourites = JSON.parse(localStorage.getItem("favourites"));
+
+    // Creating list item using meal information
+    const listItem = document.createElement("li");
     listItem.classList.add("favourite-item", "flex");
     listItem.innerHTML = `
             <a href="details.html?id=${meal.idMeal}" class="flex">
@@ -246,42 +368,25 @@ const mealApp = {
             </a>
         `;
     const favIcon = document.createElement("button");
-    favIcon.setAttribute(
-      "data-favourite",
-      favourites.includes(meal.idMeal) ? true : false
-    );
+
+    // Setting data-favourite attribute based on whether the meal is already in favourites or not
+    favIcon.setAttribute("data-favourite", favourites.includes(meal.idMeal));
     favIcon.setAttribute("data-id", meal.idMeal);
     favIcon.classList.add("favourite-btn-icon");
-    favIcon.innerHTML = "&#10084;&#65039;";
+    favIcon.innerHTML = "&#10084;&#65039;"; // Creating favourite icon using heart emoji
     favIcon.addEventListener("click", (e) => {
       setTimeout(() => {
-        mealApp.removeMealFromFavourites(e);
+        // The function to remove meal from favourites will be called after delay for the animation to play out
+        // The delay depends on the length of removing animation
+        mealApp.toggleMealInFavourites(e);
       }, 1200);
     });
     listItem.appendChild(favIcon);
+
+    // Returns the completed list item
     return listItem;
-  },
-  toggleMealInFavourites: (e) => {
-    let favourites = JSON.parse(localStorage.getItem("favourites"));
-    const index = favourites.indexOf(e.target.dataset.id);
-    if (index == -1) {
-      favourites = [...favourites, e.target.dataset.id];
-    } else {
-      favourites.splice(index, 1);
-    }
-    localStorage.setItem("favourites", JSON.stringify(favourites));
-    e.target.setAttribute(
-      "data-favourite",
-      favourites.includes(e.target.dataset.id) ? true : false
-    );
-  },
-  removeMealFromFavourites: (e) => {
-    let favourites = JSON.parse(localStorage.getItem("favourites"));
-    const index = favourites.indexOf(e.target.dataset.id);
-    favourites.splice(index, 1);
-    localStorage.setItem("favourites", JSON.stringify(favourites));
-    e.target.parentElement.remove();
   },
 };
 
+// Calls init function for initializing the app
 mealApp.init();

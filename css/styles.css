@@ -126,6 +126,8 @@ body::-webkit-scrollbar-thumb {
 /* Navigation bar properties */
 nav {
   position: fixed;
+  /* For ensuring the navigation bar is above all other elements */
+  z-index: 9999;
   width: 100vw;
   background-color: var(--background);
   padding: 2rem 2rem;
